@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>tact9_Blog</title>
+    <meta name="description" content="tact9_Blog: свежий взгляд на технологии, дизайн и искусство. Множество статей, черно-розовая эстетика, максимально современный дизайн.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background-color: #0B0E14; 
+            background-image: radial-gradient(circle at 25% 0%, rgba(242, 0, 255, 0.02) 0%, rgba(0,0,0,0) 50%);
+            color: #EFF3F8;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+
+        .site-header {
+            background: rgba(18, 22, 28, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(242, 0, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            padding: 18px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+            max-width: 450px;
+            object-fit: contain;
+            display: block;
+            transition: all 0.2s;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+        }
+        
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 20px;
+            }
+            .logo-img {
+                height: 54px;
+            }
+        }
+
+
+        .hero {
+            margin: 60px 0 40px 0;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(242, 0, 255, 0.12);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(242, 0, 255, 0.35);
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #F200FF;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF 30%, #F200FF 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #B0B8C5;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+
+        .articles-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin: 56px 0 32px 0;
+            border-bottom: 1px solid rgba(242, 0, 255, 0.3);
+            padding-bottom: 16px;
+        }
+        .articles-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #F200FF, #FFFFFF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .articles-header p {
+            color: #9AA4B2;
+            font-weight: 500;
+            background: rgba(48, 56, 67, 0.6);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 36px;
+            margin-bottom: 80px;
+        }
+        
+        .article-card {
+            background: #131A24; 
+            border-radius: 2rem;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            border: 1px solid rgba(242, 0, 255, 0.2);
+            backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            box-shadow: 0 12px 22px -10px rgba(0,0,0,0.5);
+        }
+        .article-card:hover {
+            transform: translateY(-10px);
+            border-color: #F200FF;
+            box-shadow: 0 25px 35px -12px rgba(242, 0, 255, 0.25);
+            background: #18212b;
+        }
+        
+
+        .card-img {
+            background: linear-gradient(145deg, #1E2A36, #0F151C);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #F200FF;
+            border-bottom: 1px dashed rgba(242, 0, 255, 0.3);
+        }
+        
+        .card-img svg {
+            width: 80px;
+            height: 80px;
+            stroke: #F200FF;
+            stroke-width: 1.2;
+            fill: none;
+            filter: drop-shadow(0 0 6px rgba(242,0,255,0.4));
+        }
+        
+        .card-content {
+            padding: 28px 28px 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .article-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #F200FF;
+            background: rgba(242, 0, 255, 0.12);
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            width: fit-content;
+            border: 0.5px solid rgba(242,0,255,0.3);
+        }
+        
+        .article-title {
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.35;
+            color: #F0F4FA;
+            transition: color 0.2s;
+        }
+        
+        .article-card:hover .article-title {
+            color: #F200FF;
+        }
+        
+        .article-excerpt {
+            color: #B9C2D0;
+            margin-bottom: 28px;
+            flex: 1;
+            line-height: 1.55;
+        }
+        
+        .btn-more {
+            background: transparent;
+            border: 1.5px solid rgba(242, 0, 255, 0.6);
+            padding: 12px 0;
+            text-align: center;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            color: #F200FF;
+            display: inline-block;
+            width: 100%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+        }
+        .btn-more:hover {
+            background: #F200FF;
+            color: #0B0E14;
+            border-color: #F200FF;
+            box-shadow: 0 0 14px rgba(242,0,255,0.6);
+            transform: translateY(-2px);
+        }
+
+        .load-more-wrap {
+            text-align: center;
+            margin: 20px 0 70px;
+        }
+        .load-more {
+            background: rgba(48, 56, 67, 0.7);
+            border: 1px solid rgba(242, 0, 255, 0.5);
+            color: #F200FF;
+            padding: 14px 36px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(8px);
+        }
+        .load-more:hover {
+            background: #F200FF;
+            color: #0B0E14;
+            border-color: #F200FF;
+            box-shadow: 0 0 18px #F200FF;
+        }
+
+        /* футер */
+        .site-footer {
+            background: #0A0E14;
+            border-top: 1px solid rgba(242, 0, 255, 0.2);
+            padding: 40px 0 32px;
+            margin-top: 30px;
+            text-align: center;
+            color: #9AA4B2;
+        }
+        .footer-note {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #6B7A8A;
+        }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 18px;
+        }
+        .footer-social a {
+            color: #B0B8C5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: #F200FF;
+        }
+
+        /* анимация появления */
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .article-card {
+            animation: fadeSlide 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        /* адаптив */
+        @media (max-width: 780px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .articles-grid {
+                gap: 24px;
+            }
+            .container {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="#" class="logo" aria-label="tact9_Blog">
+            <img class="logo-img" src="assets/блоглого2.png"
+                 alt="tact9_Blog ">
+        </a>
+    </div>
+</header>
+
+<main class="container">
+ 
+
+
+    <div class="articles-header">
+        <h2>Лента публикаций</h2>
+        <p>Свежие материалы</p>
+    </div>
+
+    <div class="articles-grid" id="articlesGrid">
+
+        <div class="article-card">
+            <div class="card-img">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                    <circle cx="12" cy="12" r="4" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <span class="article-tag">ТРЕНДЫ В ДИЗАЙНЕ 2026</span>
+                <h3 class="article-title">ТРЕНДЫ В ДИЗАЙНЕ 2026: </h3>
+                <p class="article-excerpt">неоновый минимализм и текстуры будущего</p>
+                <a href="postscode/post1.html" class="btn-more">Подробнее →</a>
+            </div>
+        </div>
+        <!-- СТАТЬЯ 2 -->
+        <div class="article-card">
+            <div class="card-img">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M8 12h8M12 8v8" />
+                </svg>
+            </div>
+            <div class="card-content">
+                <span class="article-tag">👋Знакомство</span>
+                <h3 class="article-title">Знакомство с tact9_blog</h3>
+                <p class="article-excerpt">Узнайте больше о tact9_blog</p>
+                <a href="postscode/post2.html" class="btn-more">Подробнее →</a>
+            </div>
+        </div>
+    </div>
+    
+ 
+
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 #tact9_Blog</p>
+        <div class="footer-note">
+            ✦ Все материалы доступны по клику «Подробнее» ✦
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

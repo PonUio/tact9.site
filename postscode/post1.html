@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>tact9_BLOG — Тренды в дизайне 2026 #1</title>
+
+  <!-- Montserrat + fallback -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e9e9e9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      padding: 20px;
+    }
+
+    /* АДАПТИВНАЯ КАРТОЧКА — вместо фиксированного 420px используем гибкий max-width */
+    .page {
+      max-width: 620px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    /* ЛОГО — адаптивное изображение */
+    .logo {
+      text-align: center;
+      padding: 28px 24px 16px;
+      background: #fff;
+    }
+
+    .logo img {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      transition: max-width 0.2s;
+    }
+
+    /* КОНТЕНТ С ГИБКИМИ ОТСТУПАМИ */
+    .content {
+      padding: 8px 28px 36px;
+    }
+
+    @media (max-width: 520px) {
+      .content {
+        padding: 8px 20px 32px;
+      }
+      .logo {
+        padding: 20px 20px 8px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .content {
+        padding: 6px 16px 28px;
+      }
+      .logo img {
+        max-width: 220px;
+      }
+    }
+
+    .subtitle {
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      color: #8f8f8f;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.3;
+      color: #111;
+    }
+
+    /* мелкие заголовки внутри текста */
+    .inner-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 20px 0 12px 0;
+      color: #1a1a1a;
+      letter-spacing: -0.2px;
+      border-left: 4px solid #00c8ff;
+      padding-left: 14px;
+    }
+
+    .divider {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f1f3f5;
+      margin: 28px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 20px;
+      color: #7c7f82;
+      transition: background 0.2s;
+    }
+
+    .text {
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.65;
+      color: #2c2e31;
+      font-weight: 400;
+    }
+
+    .text p {
+      margin-bottom: 18px;
+    }
+
+    /* кастомный список / ключевые пункты */
+    .trend-list {
+      margin: 20px 0 20px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .trend-list li {
+      margin-bottom: 16px;
+      padding-left: 24px;
+      position: relative;
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 450;
+    }
+
+    .trend-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: #00b4ff;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #eef6ff 0%, #eef6ff 40%, transparent 80%);
+      padding: 4px 6px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    /* КНИГА / ИСТОЧНИК (адаптивное изображение) */
+    .book {
+      margin-top: 20px;
+      text-align: center;
+      background: #fafcff;
+      border-radius: 24px;
+      padding: 20px 16px 16px;
+      transition: all 0.2s;
+    }
+
+    .book img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.18);
+      margin-bottom: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .book img:hover {
+      transform: scale(1.01);
+    }
+
+    .book-title {
+      font-size: 12px;
+      color: #6c6f78;
+      word-break: break-word;
+      background: #ffffffd9;
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    /* мелкие улучшения */
+    .badge-quote {
+      font-style: normal;
+      background: #f2f4f8;
+      padding: 12px 16px;
+      border-radius: 20px;
+      margin: 18px 0 12px;
+      font-size: 14px;
+      border-left: 3px solid #00c8ff;
+    }
+
+    hr {
+      margin: 18px 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, #ddd, transparent);
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 20px;
+      }
+      .inner-title {
+        font-size: 17px;
+      }
+      .text {
+        font-size: 14px;
+      }
+      .trend-list li {
+        font-size: 14px;
+        margin-bottom: 14px;
+      }
+      .divider {
+        margin: 20px auto;
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* Плавность и читаемость */
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ЛОГО (адаптивное) -->
+  <div class="logo">
+    <img src="BLOG.png" alt="tact9_BLOG logo">
+  </div>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ СТАТЬИ -->
+  <div class="content">
+    <div class="subtitle">СТАТЬЯ 1 • ИНСАЙТЫ 2026</div>
+    <div class="title">🌌  Тренды в дизайне 2026: неоновый минимализм и текстуры будущего</div>
+
+    <div class="divider">+</div>
+
+    <div class="text">
+      <p>
+        В 2026 году дизайн продолжает удивлять сочетанием простоты и технологичности. На первый план выходит <strong class="highlight">неоновый минимализм</strong> — стиль, где чистые линии и лаконичные формы сочетаются с яркими неоновыми акцентами. Это не просто визуальный приём, а отражение стремления к ясности и энергии в цифровом пространстве.
+      </p>
+
+      <!-- улучшенная структура: список ключевых особенностей тренда -->
+      <div class="inner-title">✨ Ключевые особенности тренда:</div>
+      <ul class="trend-list">
+        <li><strong>Неоновые акценты</strong> — тонкие линии, подсветка, элементы интерфейса в неоновых оттенках, которые добавляют динамики и футуристичности.</li>
+        <li><strong>Минимализм</strong> — отсутствие визуального шума, простые формы, много «воздуха» и пространства.</li>
+        <li><strong>Текстуры будущего</strong> — имитация цифровых поверхностей, голографических эффектов, мягких градиентов и органических материалов, которые выглядят как из мира sci-fi.</li>
+      </ul>
+
+      <div class="divider">+</div>
+
+      <div class="inner-title">⚡ Почему это работает?</div>
+      <p>
+        Неоновый минимализм привлекает внимание, но не перегружает. Он создаёт ощущение современности, инноваций и лёгкости. Такие решения отлично смотрятся на экранах любого размера и хорошо запоминаются. Благодаря адаптивности и контрасту, интерфейсы и бренды используют эту эстетику для привлечения молодой аудитории, ценящей ясность и футуризм.
+      </p>
+
+      <div class="badge-quote">
+        💡 <strong>совет от редакции:</strong> Попробуйте смешивать приглушённые фоны с одним-двумя неоновыми штрихами — это даст «вау-эффект» без потери читаемости.
+      </div>
+
+      <p>
+        📌  <strong>Вдохновляйтесь новыми формами и цветами</strong> — 2026 год диктует смелые, но чистые решения! Дизайнеры по всему миру интегрируют голографические плёнки, 3D-микровзаимодействия и «цифровое стекло», сохраняя минималистичный каркас.
+      </p>
+
+      <p>
+        🔮 От веб-сайтов до мобильных приложений — неоновая подсветка добавляет глубины, а тактильные текстуры (даже в 2D) создают ощущение физического присутствия. Это новый виток эволюции цифрового искусства.
+      </p>
+    </div>
+
+    <div class="divider">+</div>
+
+    <!-- Адаптивный блок с изображением и ссылкой-источником -->
+    <div class="book">
+      <img src="posts/post1.png" alt="визуал тренда неоновый минимализм 2026" onerror="this.src='https://placehold.co/600x400?text=neon+minimalism+2026';">
+      <div class="book-title">
+        📖 Источник: <a href="https://medium.com/design-bootcamp/top-6-design-trends-in-2026-5dec31eb0988" target="_blank" rel="noopener noreferrer" style="color: #2a6f8f; text-decoration: none; border-bottom: 1px dotted #8fcbff;">medium.com/design-bootcamp</a>
+      </div>
+    </div>
+
+    
+      <!-- Put this script tag to the <head> of your page -->
+      <script
+        type="text/javascript"
+        src="https://vk.ru/js/api/openapi.js?168"
+        charset="windows-1251"
+      ></script>
+      <script type="text/javascript">
+        VK.init({ apiId: 54522388, onlyWidgets: true });
+      </script>
+
+      <!-- Put this script tag to the place, where the Like block will be -->
+      <div id="vk_like"></div>
+      <script type="text/javascript">
+        VK.Widgets.Like("vk_like", {type: "button", height: 22});
+      </script>
+    
+    
+    <!-- Put this script tag to the <head> of your page -->
+    <script type="text/javascript" src="https://vk.ru/js/api/openapi.js?168"></script>
+    <script type="text/javascript">
+      VK.init({ apiId: 54522388, onlyWidgets: true });
+    </script>
+
+    <!-- Put this div tag to the place, where the Comments block will be -->
+    <div id="vk_comments"></div>
+    <script type="text/javascript">
+      VK.Widgets.Comments("vk_comments", {limit: 10, attach: "*"});
+    </script>
+  </div>
+</div>
+
+
+
+</body>
+</html>
