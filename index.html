@@ -1,525 +1,1138 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>tact9 design — креативная студия</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>❤️ Для тебя</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: #303843;
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
-    width: 100%;
-  }
+        body {
+            background: #2a1a2a;
+            background-image: 
+                repeating-linear-gradient(0deg, 
+                    rgba(60, 30, 60, 0.5) 0px, 
+                    rgba(60, 30, 60, 0.5) 4px,
+                    transparent 4px,
+                    transparent 8px),
+                repeating-linear-gradient(90deg, 
+                    rgba(60, 30, 60, 0.5) 0px, 
+                    rgba(60, 30, 60, 0.5) 4px,
+                    transparent 4px,
+                    transparent 8px);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            font-family: 'Press Start 2P', monospace;
+            margin: 0;
+            position: relative;
+        }
 
-  html, body {
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: auto;
-  }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            image-rendering: pixelated;
+        }
 
-  body {
-    display: flex;
-    flex-direction: column;
-    background: #303843;
-  }
+        .album-page {
+            max-width: 820px;
+            width: 100%;
+            background: #1a0a1a;
+            background-image: 
+                radial-gradient(ellipse at 30% 20%, #2a1a2a 0%, #0a000a 100%);
+            padding: 28px 24px 24px;
+            position: relative;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.8),
+                inset 0 0 80px rgba(80, 20, 80, 0.05);
+            image-rendering: pixelated;
+            z-index: 1;
+            border: 2px solid #3a2a3a;
+        }
 
-  .desktop-version {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    background: #303843;
-    overflow-x: hidden;
-    overflow-y: visible;
-  }
-  
-  .mobile-version {
-    display: none;
-  }
+        .album-page::before {
+            content: '☻';
+            position: absolute;
+            top: 6px;
+            right: 16px;
+            color: #3a2a3a;
+            font-size: 16px;
+            image-rendering: pixelated;
+            opacity: 0.3;
+        }
 
-  .desktop-container {
-    width: 1920px;
-    height: 3636px;
-    position: relative;
-    background: #303843;
-    overflow: visible;
-    transform-origin: top center;
-    transition: transform 0.05s linear;
-    will-change: transform;
-    flex-shrink: 0;
-  }
+        .album-page::after {
+            content: '☺';
+            position: absolute;
+            bottom: 6px;
+            left: 16px;
+            color: #3a2a3a;
+            font-size: 16px;
+            image-rendering: pixelated;
+            opacity: 0.3;
+        }
 
-  .mobile-version {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-    background: #303843;
-  }
-  
-  .mobile-container {
-    width: 402px;
-    position: relative;
-    background: #303843;
-    overflow-x: hidden;
-    margin: 0 auto;
-    min-height: 1674px;
-  }
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding: 4px 0;
+            position: relative;
+            z-index: 1;
+        }
 
-  @media screen and (max-width: 600px) {
-    .desktop-version {
-      display: none !important;
-    }
-    .mobile-version {
-      display: flex !important;
-    }
-  }
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: #3a2a3a;
+            border: 2px solid #1a0a1a;
+            transition: all 0.1s steps(2);
+            cursor: pointer;
+            box-shadow: inset 0 0 0 1px #0a000a;
+            image-rendering: pixelated;
+            position: relative;
+        }
 
-  @media screen and (min-width: 601px) {
-    .desktop-version {
-      display: flex !important;
-    }
-    .mobile-version {
-      display: none !important;
-    }
-  }
+        .dot.active {
+            background: #ff6b8a;
+            border-color: #ff3a6a;
+            box-shadow: 
+                0 0 0 2px #1a0a1a,
+                inset 0 0 0 1px #ff9ab0;
+            transform: scale(1.1);
+        }
 
-  @keyframes fadeSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(25px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+        .dot:hover {
+            background: #8a5a7a;
+        }
 
-  .animate-text {
-    animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
-    opacity: 0;
-  }
+        .slides-container {
+            position: relative;
+            min-height: 440px;
+            image-rendering: pixelated;
+            z-index: 1;
+        }
 
-  @keyframes floatSoft {
-    0% {
-      transform: translateY(0px) rotate(var(--rot-start, 0deg));
-    }
-    50% {
-      transform: translateY(-12px) rotate(var(--rot-mid, 0deg));
-    }
-    100% {
-      transform: translateY(0px) rotate(var(--rot-start, 0deg));
-    }
-  }
+        .slide {
+            display: none;
+            animation: pixelJump 0.3s steps(3) forwards;
+            flex-direction: column;
+            align-items: center;
+        }
 
-  .float-elem {
-    animation: floatSoft 5s ease-in-out infinite;
-    will-change: transform;
-  }
+        .slide.active {
+            display: flex;
+        }
 
-  .float-elem-1 { --rot-start: 16deg; --rot-mid: 20deg; }
-  .float-elem-2 { --rot-start: 28deg; --rot-mid: 32deg; }
-  .float-elem-group { --rot-start: -3deg; --rot-mid: 0deg; }
-  .float-elem-star { --rot-start: -52deg; --rot-mid: -48deg; }
+        @keyframes pixelJump {
+            0% { opacity: 0; transform: translateY(8px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
-  .typewriter-cursor::after {
-    content: "|";
-    animation: blink 1s step-end infinite;
-    margin-left: 2px;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
+        .page-label {
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: #6a4a5a;
+            margin-bottom: 4px;
+            font-family: 'Press Start 2P', monospace;
+            opacity: 0.6;
+        }
 
-  button, a, .clickable {
-    cursor: pointer;
-  }
-  a {
-    text-decoration: none;
-  }
+        .page-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 22px;
+            color: #ff9ab0;
+            margin-bottom: 14px;
+            text-align: center;
+            text-shadow: 3px 3px 0 #1a0a1a;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            position: relative;
+        }
 
-  .mobile-version .mobile-container {
-    position: relative;
-  }
-  
-  .mobile-version .btn-about-mobile,
-  .mobile-version .btn-price-scroll-mobile,
-  .mobile-version .btn-blog-mobile,
-  .mobile-version .telegram-link-mobile,
-  .mobile-version [data-layer="О НАС"],
-  .mobile-version [data-layer="ПРАЙС-ЛИСТ"],
-  .mobile-version [data-layer="Блог"] {
-    position: absolute;
-    z-index: 150 !important;
-    cursor: pointer;
-    pointer-events: auto;
-  }
-  
-  .mobile-version .mobile-container img[data-layer="пятнаоптимизация"],
-  .mobile-version .mobile-container img[data-layer="бумагаоптимизация"],
-  .mobile-version .mobile-container img.float-elem,
-  .mobile-version .mobile-container .Rectangle42327,
-  .mobile-version .mobile-container .Rectangle42328,
-  .mobile-version .mobile-container .Rectangle42329 {
-    pointer-events: none;
-  }
-  
-  .mobile-version .btn-about-mobile,
-  .mobile-version .btn-price-scroll-mobile,
-  .mobile-version .btn-blog-mobile,
-  .mobile-version .telegram-link-mobile {
-    pointer-events: auto;
-    cursor: pointer;
-  }
-  
-  .mobile-version .btn-about-mobile,
-  .mobile-version .btn-price-scroll-mobile,
-  .mobile-version .btn-blog-mobile {
-    user-select: none;
-  }
+        .page-title::after {
+            content: '~~~~~';
+            display: block;
+            font-size: 8px;
+            color: #4a2a4a;
+            margin-top: 2px;
+            letter-spacing: 6px;
+        }
 
-  .mobile-version img[data-layer="пятнаоптимизация 2"],
-  .mobile-version img[src*="пятнаоптимизация"] {
-    z-index: 1;
-    position: absolute;
-    pointer-events: none;
-  }
-  
-  .mobile-version .mobile-container > div,
-  .mobile-version .mobile-container > img {
-    pointer-events: none;
-  }
-  
-  .mobile-version .btn-about-mobile,
-  .mobile-version .btn-price-scroll-mobile,
-  .mobile-version .btn-blog-mobile,
-  .mobile-version .telegram-link-mobile,
-  .mobile-version .telegram-link-mobile svg,
-  .mobile-version [data-layer="Блог"],
-  .mobile-version [data-layer="О НАС"],
-  .mobile-version [data-layer="ПРАЙС-ЛИСТ"] {
-    pointer-events: auto !important;
-  }
-  
-  .mobile-version .btn-about-mobile,
-  .mobile-version .btn-price-scroll-mobile,
-  .mobile-version .btn-blog-mobile {
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  }
-  
-  .desktop-version .btn-about,
-  .desktop-version .btn-price-scroll,
-  .desktop-version .btn-blog,
-  .desktop-version .telegram-link {
-    cursor: pointer;
-    z-index: 200;
-    position: absolute;
-  }
-</style>
+        .gift-scene {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .gift-image-wrapper {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.1s steps(2);
+            background: transparent;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 8px 30px rgba(0,0,0,0.4));
+        }
+
+        .gift-image-wrapper:hover {
+            transform: scale(1.02) rotate(-0.5deg);
+        }
+
+        .gift-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .gift-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180%;
+            height: 180%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, 
+                rgba(255, 200, 100, 0.5) 0%, 
+                rgba(255, 200, 100, 0.15) 30%,
+                rgba(255, 200, 100, 0) 60%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s steps(3);
+            z-index: 2;
+            image-rendering: pixelated;
+        }
+
+        .gift-glow.active {
+            opacity: 1;
+        }
+
+        .gift-hint {
+            margin-top: 14px;
+            font-size: 10px;
+            color: #6a4a5a;
+            font-family: 'Press Start 2P', monospace;
+            border-bottom: 2px solid #3a2a3a;
+            padding-bottom: 4px;
+            cursor: pointer;
+            transition: all 0.1s steps(2);
+            letter-spacing: 1px;
+        }
+
+        .gift-hint:hover {
+            color: #ff9ab0;
+            border-bottom-color: #8a5a7a;
+        }
+
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+            image-rendering: pixelated;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            opacity: 0;
+            animation: confettiFall linear forwards;
+            border: 1px solid rgba(255,255,255,0.1);
+            image-rendering: pixelated;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(0deg) scale(0);
+            }
+            30% {
+                opacity: 1;
+                transform: translateY(25vh) rotate(90deg) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) rotate(270deg) scale(0.4);
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            font-size: 20px;
+            animation: sparkleBoom 1s steps(4) forwards;
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+            image-rendering: pixelated;
+        }
+
+        @keyframes sparkleBoom {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.2) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg);
+            }
+        }
+
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px 16px;
+            width: 100%;
+            margin: 4px 0 2px;
+        }
+
+        .polaroid {
+            background: #1a0a1a;
+            padding: 8px 8px 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            transform: rotate(var(--rot, 0deg));
+            transition: all 0.1s steps(2);
+            image-rendering: pixelated;
+            position: relative;
+            border: 2px solid #2a1a2a;
+        }
+
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
+            background: linear-gradient(180deg, 
+                rgba(255,255,255,0.02) 0%, 
+                transparent 40%,
+                transparent 60%,
+                rgba(0,0,0,0.04) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.02) !important;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+            z-index: 5;
+        }
+
+        .polaroid img,
+        .polaroid .video-placeholder {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            background: #0a000a;
+            position: relative;
+            z-index: 1;
+            border: 1px solid #2a1a2a;
+        }
+
+        .polaroid .video-placeholder {
+            background: #0a000a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .polaroid .video-placeholder video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            background: #0a000a;
+        }
+
+        .polaroid .video-placeholder .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 3;
+            transition: opacity 0.2s steps(2);
+        }
+
+        .polaroid .video-placeholder .play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .polaroid .video-placeholder .play-overlay::before {
+            content: '▶';
+            font-size: 40px;
+            color: #ff9ab0;
+            text-shadow: 0 0 30px rgba(255, 100, 150, 0.3);
+            image-rendering: pixelated;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        .polaroid .video-placeholder .play-overlay:hover::before {
+            transform: scale(1.1);
+        }
+
+        .polaroid-caption {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            color: #6a4a5a;
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .polaroid:nth-child(1) { --rot: -3deg; margin-top: 6px; }
+        .polaroid:nth-child(2) { --rot: 4deg; margin-top: -4px; }
+        .polaroid:nth-child(3) { --rot: -2deg; margin-top: 10px; }
+        .polaroid:nth-child(4) { --rot: 5deg; margin-top: -6px; }
+        .polaroid:nth-child(5) { --rot: -4deg; margin-top: 8px; }
+        .polaroid:nth-child(6) { --rot: 3deg; margin-top: -2px; }
+
+        .video-frame {
+            width: 100%;
+            background: transparent;
+            padding: 0;
+            image-rendering: pixelated;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+
+        .video-frame iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 2px solid #2a1a2a;
+            display: block;
+            image-rendering: pixelated;
+        }
+
+        .quote-block {
+            background: rgba(26, 10, 26, 0.9);
+            padding: 18px 22px;
+            margin: 18px 0 4px;
+            text-align: center;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            color: #b88aaa;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            line-height: 2;
+            max-width: 92%;
+            position: relative;
+            border: 2px solid #2a1a2a;
+        }
+
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: -2px;
+            left: 10px;
+            font-size: 24px;
+            color: #4a2a4a;
+            opacity: 0.4;
+        }
+
+        .quote-block span {
+            color: #ff9ab0;
+        }
+
+        .letter-scene {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 4px 0;
+        }
+
+        .envelope-photo {
+            position: relative;
+            width: 220px;
+            height: 150px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.1s steps(2);
+            flex-shrink: 0;
+            image-rendering: pixelated;
+            background: transparent;
+            filter: drop-shadow(0 8px 30px rgba(0,0,0,0.4));
+        }
+
+        .envelope-photo:hover {
+            transform: scale(1.02) translateY(-3px);
+        }
+
+        .envelope-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            border: 2px solid #2a1a2a;
+        }
+
+        .envelope-photo::after {
+            content: '✉';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            color: #ff9ab0;
+            text-shadow: 0 0 30px rgba(255, 100, 150, 0.2);
+            opacity: 0;
+            transition: opacity 0.15s steps(2);
+            pointer-events: none;
+            font-family: 'Press Start 2P', monospace;
+            image-rendering: pixelated;
+        }
+
+        .envelope-photo:hover::after {
+            opacity: 0.8;
+        }
+
+        .envelope-hint {
+            margin-top: 12px;
+            font-size: 9px;
+            color: #6a4a5a;
+            font-family: 'Press Start 2P', monospace;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #3a2a3a;
+            padding-bottom: 4px;
+        }
+
+        .letter-text-box {
+            background: rgba(26, 10, 26, 0.95);
+            padding: 22px 26px;
+            max-width: 100%;
+            display: none;
+            animation: pixelPop 0.3s steps(3) forwards;
+            margin-top: 16px;
+            width: 100%;
+            image-rendering: pixelated;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid #2a1a2a;
+        }
+
+        .letter-text-box::before {
+            content: '☻';
+            position: absolute;
+            top: -6px;
+            right: 12px;
+            font-size: 14px;
+            color: #4a2a4a;
+            opacity: 0.3;
+        }
+
+        .letter-text-box::after {
+            content: '☺';
+            position: absolute;
+            bottom: -6px;
+            left: 12px;
+            font-size: 14px;
+            color: #4a2a4a;
+            opacity: 0.3;
+        }
+
+        .letter-text-box.open {
+            display: block;
+        }
+
+        @keyframes pixelPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(6px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .letter-text-box h4 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 15px;
+            color: #ff9ab0;
+            margin-bottom: 12px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .letter-text-box p {
+            color: #9a7a8a;
+            line-height: 2;
+            font-size: 9px;
+            margin-bottom: 10px;
+            text-align: justify;
+            font-family: 'Press Start 2P', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .letter-text-box .sig {
+            text-align: right;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 11px;
+            color: #ff9ab0;
+            margin-top: 8px;
+        }
+
+        .final-heart {
+            text-align: center;
+            padding: 16px 0;
+            font-size: 10px;
+            color: #9a7a8a;
+            line-height: 2.2;
+            max-width: 420px;
+            margin: 0 auto;
+            font-family: 'Press Start 2P', monospace;
+            position: relative;
+        }
+
+        .final-heart span {
+            display: block;
+            margin-top: 14px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 16px;
+            color: #ff9ab0;
+            letter-spacing: 2px;
+        }
+
+        .sticker-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 10px 0 15px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .sticker {
+            width: 100px;
+            height: 100px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            filter: drop-shadow(0 6px 20px rgba(0,0,0,0.5));
+            border: 3px solid #2a1a2a;
+            background: #1a0a1a;
+            padding: 6px;
+            transform: rotate(var(--rot, 0deg));
+            transition: transform 0.3s steps(3);
+            flex-shrink: 0;
+        }
+
+        .sticker:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .sticker img,
+        .sticker video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .sticker-left {
+            --rot: -6deg;
+        }
+
+        .sticker-right {
+            --rot: 8deg;
+        }
+
+        .final-decor {
+            margin-top: 16px;
+            font-size: 24px;
+            text-align: center;
+            opacity: 0.2;
+            letter-spacing: 12px;
+            color: #4a2a4a;
+        }
+
+        .nav-area {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 2px solid #3a2a3a;
+            image-rendering: pixelated;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-next {
+            background: #3a2a3a;
+            border: 2px solid #5a3a5a;
+            padding: 12px 28px;
+            color: #b88aaa;
+            font-size: 11px;
+            font-family: 'Press Start 2P', monospace;
+            cursor: pointer;
+            transition: all 0.1s steps(2);
+            box-shadow: 4px 4px 0 #0a000a;
+            letter-spacing: 1px;
+            image-rendering: pixelated;
+            position: relative;
+        }
+
+        .btn-next::before {
+            content: '▸';
+            margin-right: 6px;
+            color: #6a4a5a;
+        }
+
+        .btn-next:hover {
+            background: #5a3a5a;
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #0a000a;
+        }
+
+        .btn-next:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #0a000a;
+        }
+
+        .btn-next:disabled {
+            opacity: 0.3;
+            cursor: default;
+            transform: none !important;
+            box-shadow: 3px 3px 0 #0a000a;
+        }
+
+        .btn-next:disabled::before {
+            content: '★';
+        }
+
+        .page-counter {
+            font-size: 10px;
+            color: #4a2a4a;
+            margin-right: 16px;
+            font-family: 'Press Start 2P', monospace;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 640px) {
+            .album-page { padding: 18px 14px 18px; }
+            .page-title { font-size: 18px; }
+            .polaroid-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .polaroid { padding: 6px 6px 12px; }
+            .polaroid-caption { font-size: 6px; }
+            .btn-next { padding: 8px 16px; font-size: 9px; }
+            .quote-block { font-size: 9px; padding: 12px; }
+            .gift-image-wrapper { width: 180px; height: 180px; }
+            .envelope-photo { width: 160px; height: 110px; }
+            .letter-text-box { padding: 14px; }
+            .letter-text-box h4 { font-size: 12px; }
+            .letter-text-box p { font-size: 7px; }
+            .dots { gap: 8px; }
+            .dot { width: 12px; height: 12px; }
+            .gift-hint { font-size: 8px; }
+            .envelope-hint { font-size: 8px; }
+            .final-heart { font-size: 8px; max-width: 320px; }
+            .final-heart span { font-size: 13px; }
+            .final-decor { font-size: 18px; }
+            .album-page::before,
+            .album-page::after { font-size: 12px; }
+            .polaroid .video-placeholder .play-overlay::before { font-size: 30px; }
+            .sticker {
+                width: 75px;
+                height: 75px;
+                padding: 4px;
+            }
+            .sticker-container { gap: 20px; }
+        }
+
+        @media (max-width: 440px) {
+            .polaroid-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .polaroid img { aspect-ratio: 1/1; }
+            .gift-image-wrapper { width: 140px; height: 140px; }
+            .page-title { font-size: 14px; }
+            .album-page { padding: 12px 8px 14px; }
+            .album-page::before,
+            .album-page::after { font-size: 10px; top: 3px; }
+            .envelope-photo { width: 120px; height: 80px; }
+            .envelope-photo::after { font-size: 24px; }
+            .letter-text-box { padding: 10px; }
+            .letter-text-box h4 { font-size: 10px; }
+            .letter-text-box p { font-size: 6px; }
+            .btn-next { padding: 6px 12px; font-size: 7px; }
+            .page-counter { font-size: 7px; }
+            .quote-block { font-size: 7px; padding: 8px; }
+            .gift-hint { font-size: 7px; }
+            .dots { gap: 6px; }
+            .dot { width: 10px; height: 10px; }
+            .polaroid .video-placeholder video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .polaroid .video-placeholder .play-overlay::before { font-size: 24px; }
+            .sticker {
+                width: 60px;
+                height: 60px;
+                padding: 3px;
+            }
+            .sticker-container { gap: 15px; }
+            .final-heart { font-size: 7px; max-width: 250px; }
+            .final-heart span { font-size: 11px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="desktop-version">
-  <div class="desktop-container" style="width: 1920px; height: 3636px; position: relative; background: #303843; overflow: visible">
-    
-    <img data-layer="Group 1000009100 1" class="Group10000091001 float-elem float-elem-group" style="width: 750px; height: 750px; left: 814px; top: 22px; position: absolute" src="assets/Group 1000009100.png" />
-    <img data-layer="котикспит" style="width: 697px; height: 465px; left: 1017.93px; top: 477px; position: absolute" src="assets/котикспит.png" />
-    <div data-layer="В НАШЕМ БЛОГЕ ВЫ НАЙДЕТЕ ПОЛЕЗНЫЕ СТАТЬИ ДЛЯ ДИЗАЙНЕРОВ" style="width: 381px; height: 215px; left: 1010px; top: 289px; position: absolute; color: #303843; font-size: 32px; font-family: Montserrat; font-weight: 800; line-height: 40px; word-wrap: break-word">В НАШЕМ БЛОГЕ ВЫ НАЙДЕТЕ ПОЛЕЗНЫЕ СТАТЬИ ДЛЯ ДИЗАЙНЕРОВ</div>
-    <img data-layer="звездочки" class="float-elem float-elem-star" style="width: 436.94px; height: 436.94px; left: 1400px; top: 802.50px; position: absolute; transform: rotate(-52deg); transform-origin: top left" src="assets/звездочки.png" />
-    <img data-layer="элемент1" class="1 float-elem float-elem-1" style="width: 400.56px; height: 400.56px; left: 794.58px; top: 534.45px; position: absolute; transform: rotate(16deg); transform-origin: top left" src="assets/элемент1.png" />
-    <img data-layer="элемент2" class="2 float-elem float-elem-2" style="width: 674.55px; height: 674.55px; left: 99.31px; top: 1307px; z-index: 100; position: absolute; transform: rotate(28deg); transform-origin: top left" src="assets/элемент2.png" />
-    <img data-layer="ПЯТНА 1" class="1" style="width: 1920px; height: 3406px; left: 2px; top: 5px; z-index: 100; position: absolute" src="assets/ПЯТНА.png" />
-    <img data-layer="БУМАГА ТЕКСТУРА 1" class="1" style="width: 1920px; height: 2093px; left: 0px; top: 868px; position: absolute" src="assets/БУМАГА ТЕКСТУРА.png" />
-    
-    <div data-layer="Rectangle 42328" class="Rectangle42328" style="width: 175px; height: 52px; left: 1664px; top: 37px; position: absolute; background: #FB4601; border-radius: 20px"></div>
-    <div data-layer="Rectangle 42329" class="Rectangle42329" style="width: 315px; height: 52px; left: 1322px; top: 37px; position: absolute; background: #826DEE; border-radius: 20px"></div>
-    <div data-layer="О НАС" class="btn-about" style="width: 175px; height: 25px; left: 1664px; top: 50px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 40px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word; cursor: pointer;">О НАС</div>
-    <div data-layer="ПРАЙС-ЛИСТ" class="btn-price-scroll" style="width: 290px; height: 25px; left: 1336px; top: 50px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 40px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word; cursor: pointer;">ПРАЙС-ЛИСТ</div>
-    
-    <div data-layer="ПЛАШКА НАЧАЛЬНАЯ" style="width: 676px; height: 891px; left: 76px; top: 37px; position: absolute">
-      <div data-layer="Rectangle 42327" class="Rectangle42327" style="width: 676px; height: 891px; left: 0px; top: 0px; position: absolute; background: #826DEE; border-radius: 40px"></div>
-      <img data-layer="лого 1" class="1" style="width: 299px; height: 82px; left: 29px; top: 40px; position: absolute" src="assets/лого.png" />
-      <div data-layer="Rectangle 42325" class="Rectangle42325" style="width: 186px; height: 65px; left: 463px; top: 40px; position: absolute; background: #FB4601; border-radius: 20px"></div>
-      <div data-layer="Rectangle 42326" class="Rectangle42326" style="width: 65px; height: 65px; left: 380px; top: 40px; position: absolute; background: #FFDC16; border-radius: 20px"></div>
-      <div data-layer="Блог" class="btn-blog" style="width: 125px; height: 32px; left: 493px; top: 52px; position: absolute; text-align: center; color: white; font-size: 48px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word; cursor: pointer;">Блог</div>
-      <div data-layer="Новая дизайн студия, разрабатываем дизайн качественно, быстро и дешево." style="width: 450px; height: 336px; left: 29px; top: 159px; position: absolute; color: white; font-size: 36px; font-family: Montserrat; font-weight: 600; line-height: 35px; word-wrap: break-word">Новая дизайн студия, разрабатываем дизайн качественно, быстро и дешево. </div>
-      <div data-layer="tact9: Мы только начинаем, но уже чувствуем ритм." class="typewriter-text" style="width: 629px; height: 146px; left: 23px; top: 680px; position: absolute; color: white; font-size: 45px; font-family: Rubik Mono One; font-weight: 400; text-transform: uppercase; line-height: 55px; word-wrap: break-word;">tact9: Мы только начинаем, но уже чувствуем ритм.</div>
-      <img data-layer="ЛИНИЯ1 1" class="11" style="width: 188px; height: 28px; left: 412px; top: 634px; position: absolute" src="assets/ЛИНИЯ1.png" />
-      <img data-layer="ЛИНИЯ2 1" class="21" style="width: 312px; height: 21px; left: 29px; top: 305px; position: absolute" src="assets/ЛИНИЯ2.png" />
-      <div data-svg-wrapper data-layer="ТГЛОГО 1" class="telegram-link" style="left: 394px; top: 57px; position: absolute; cursor: pointer;">
-        <svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="37" height="31" fill="url(#pattern0_326_209)"/>
-          <defs>
-            <pattern id="pattern0_326_209" patternContentUnits="objectBoundingBox" width="1" height="1">
-              <use xlink:href="#image0_326_209" transform="scale(0.027027 0.0322581)"/>
-            </pattern>
-            <image id="image0_326_209" width="37" height="31" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAfCAYAAABgfwTIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAt5JREFUeAHFmEty2kAQhrsFVfbSvoG4gVikAivLJK7KjtzAcILACQwnsHOC+AY46wQYryDFwpMThNwgWYFjS53W6GFJSEKIh/8qQDPStD5NP2YEwivLMM0TWJQuAeEjN00A6iO8kozaexOIPikQhJPgBMGfMhxQRs3UAcotF4ZOIGVK9g6V4B6ALP8gyL1BKfeg3YQFtiLuWSsSO40pNSvLcocNX3JTT72Q4M4DNeOnEG1zaygF8ljioAU3aLOEJBGoQ8/lv1CyB5AEfmydalAUht1j1BvXHC+/GGiQCcQZxV89ORlVibACmj1OBCKSUojNsi/knjP+8OxgdtC6EoBWW07F3Hjb4LF4nT4G5853LigVtEBXsPSyJ5dozgHSlZPhnWejp2xkS2RCuSBgBjVlEyHdwJHdd1yhbNXf3XiFMnuYZkv1GwFZqSkbS3D29B4m4/vA3rI0yGtLToeKR81UUPIXsZKfVyqQoSd/DD/7XUbtgw6P/xwgI6cV4R+Ug6ktWhxUzbG6TiBHgOBpzImg57bD5SKAYqAmFCKiOSK1HqauqwKgNxc8M0/JNShLtib8Q01ORxW+QZs/t54b8gD14Niu+rETANUardQatBbq+bd/uDJF1frFGZHVAhWcqMdOC7C0rpx9k/FxqgYh16Ai4sngeDxNhYrcyHFFyWqqbLTxNhzIkevy1aAsCc6881xQeeQmCqytQdniJWg66vutwluXoAZRoXoWESeMCLcLL8iw1NbvCnKKjuhnuF0cClCHXcjbGYS7ikMVqfzJdlYyuTgU7QiKcIdQq9bnXMOq/Oi9TUaBbd3Hu7Z5cdAhDAT2uZyN+Bck1y2+kf0lT9zJmdiH+zyg0IIsp9+F06eWrmyJpM4tA30V6AVMzLkgtnn176bbIAm7heLdZQpQBG4y4uusivsAMYV2BhHTcCC5r2LaFWdbR3U4OxK0qkkPdfA/OLxdiAlW6WvSbsPRf8LWQooR8jhgAAAAAElFTkSuQmCC"/>
-          </defs>
-        </svg>
-      </div>
-    </div>
-    
-    <div data-layer="ДИЗАЙН" class="animate-text" style="width: 790px; height: 156px; left: 61px; top: 1049px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #303843; font-size: 128px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">ДИЗАЙН</div>
-    <div data-layer="ПРАЙС-ЛИСТ" style="width: 996px; height: 156px; left: 53px; top: 1912px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #303843; font-size: 128px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">ПРАЙС-ЛИСТ</div>
-    <div data-layer="Rectangle 42313" class="Rectangle42313" style="width: 4px; height: 228px; left: 281px; top: 1280px; position: absolute; background: #303843"></div>
-    <div data-layer="Дизайн — это не просто то, как он выглядит и ощущается. Дизайн — это то, как это работает. Сложно создавать изделия по интересам. Часто люди не знают, чего хотят, пока вы им это не покажете." style="width: 590px; height: 110px; left: 312px; top: 1282px; position: absolute; color: #303843; font-size: 27px; font-family: Montserrat; font-weight: 500; line-height: 30px; word-wrap: break-word">Дизайн — это не просто то, как он выглядит и ощущается. Дизайн — это то, как это работает.<br/>Сложно создавать изделия по интересам. Часто люди не знают, чего хотят, пока вы им это не покажете.</div>
-    <div data-layer="Стив Джобс." style="width: 590px; height: 111px; left: 312px; top: 1466px; position: absolute; color: #303843; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">Стив Джобс.</div>
-    <div data-layer="Rectangle 42312" class="Rectangle42312" style="width: 4px; height: 124px; left: 1018px; top: 1377px; position: absolute; background: #303843"></div>
-    <div data-layer="Есть три ответа на результат дизайна – да, нет и «ничего себе»! Ничего себе – это то, к чему надо стремиться." style="width: 590px; height: 111px; left: 1049px; top: 1374px; position: absolute; color: #303843; font-size: 27px; font-family: Montserrat; font-weight: 500; line-height: 30px; word-wrap: break-word">Есть три ответа на результат дизайна – да, нет и «ничего себе»! Ничего себе – это то, к чему надо стремиться.</div>
-    <div data-layer="Милтон Глэзер, графический дизайнер." style="width: 590px; height: 111px; left: 1049px; top: 1466px; position: absolute; color: #303843; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">Милтон Глэзер, графический дизайнер.</div>
-    <div data-layer="Rectangle 42314" class="Rectangle42314" style="width: 5px; height: 235px; left: 650px; top: 1534px; position: absolute; background: #303843"></div>
-    <div data-layer="Дизайн — это визуальное мышление. Я хочу создавать красивые вещи, даже если это никому не нужно, в качестве противостояния некрасивым вещам. Это – мое намерение." style="width: 575px; height: 110px; left: 680px; top: 1540px; position: absolute; color: #303843; font-size: 27px; font-family: Montserrat; font-weight: 500; line-height: 30px; word-wrap: break-word">Дизайн — это визуальное мышление.<br/>Я хочу создавать красивые вещи, даже если это никому не нужно, в качестве противостояния некрасивым вещам. Это – мое намерение.</div>
-    <div data-layer="Сол Басс, американский графический дизайнер." style="width: 590px; height: 111px; left: 680px; top: 1708px; position: absolute; color: #303843; font-size: 24px; font-family: Montserrat; font-weight: 700; line-height: 25px; word-wrap: break-word">Сол Басс, американский графический дизайнер.</div>
-    
-    <div id="examples-section-desktop" style="position: relative;">
-      <img id="price-scroll-target-desktop" data-layer="примерыработ 1" style="width: 1454px; height: 763px; left: 233px; top: 2005px; position: absolute" src="assets/примерыработ.png" />
-      <div data-layer="ПЛАКАТЫ" style="width: 224px; height: 41px; left: 466px; top: 2608px; position: absolute; text-align: center; color: #303843; font-size: 40px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">ПЛАКАТЫ</div>
-      <div data-layer="ИНФОГРАФИКА" style="width: 373px; height: 40px; left: 808px; top: 2620px; position: absolute; text-align: center; color: #303843; font-size: 40px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">ИНФОГРАФИКА</div>
-      <div data-layer="ПОЛИГРАФИЯ" style="width: 374px; height: 40px; left: 1231px; top: 2663px; position: absolute; text-align: center; color: #303843; font-size: 40px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">ПОЛИГРАФИЯ</div>
-      <div data-layer="ВИЗИТКИ - ОТ 200₽" class="200" style="width: 399px; height: 41px; left: 1218px; top: 2703px; position: absolute; text-align: center; color: #303843; font-size: 36px; font-family: Montserrat; font-style: italic; font-weight: 500; line-height: 40px; word-wrap: break-word">ВИЗИТКИ - ОТ 200₽</div>
-      <div data-layer="ФЛАЕРЫ - ОТ 250₽" class="250" style="width: 374px; height: 40px; left: 1231px; top: 2744px; position: absolute; text-align: center; color: #303843; font-size: 36px; font-family: Montserrat; font-style: italic; font-weight: 500; line-height: 40px; word-wrap: break-word">ФЛАЕРЫ - ОТ 250₽</div>
-      <div data-layer="ОТ 500₽" class="500" style="width: 224px; height: 40px; left: 466px; top: 2649px; position: absolute; text-align: center"><span style="color: #303843; font-size: 36px; font-family: Montserrat; font-weight: 500; line-height: 40px; word-wrap: break-word">ОТ </span><span style="color: #303843; font-size: 36px; font-family: Montserrat; font-style: italic; font-weight: 500; line-height: 40px; word-wrap: break-word">500₽</span></div>
-      <div data-layer="ОТ 200₽" class="200" style="width: 224px; height: 41px; left: 876px; top: 2655px; position: absolute; text-align: center"><span style="color: #303843; font-size: 36px; font-family: Montserrat; font-weight: 500; line-height: 40px; word-wrap: break-word">ОТ </span><span style="color: #303843; font-size: 36px; font-family: Montserrat; font-style: italic; font-weight: 500; line-height: 40px; word-wrap: break-word">200₽</span></div>
-    </div>
-    
-    <img data-layer="звездочки" class="float-elem float-elem-star" style="width: 436.94px; height: 436.94px; left: 1527px; top: 2543.50px; position: absolute; transform: rotate(-52deg); transform-origin: top left" src="assets/звездочки.png" />
-    <div data-layer="БОЛЬШЕ РАБОТ В НАШЕМ PINTEREST" class="Pinterest" style="width: 1819px; height: 448px; left: 85px; top: 2965px; position: absolute; text-align: center; color: white; font-size: 64px; font-family: Montserrat; font-weight: 700; line-height: 120px; word-wrap: break-word">БОЛЬШЕ РАБОТ В НАШЕМ PINTEREST</div>
-    <img data-layer="блоглого 1" class="1" style="width: 542px; height: 142px; left: 689px; top: 3118px; position: absolute" src="assets/блоглого.png" />
-    
-    <div data-layer="Rectangle 42331" class="Rectangle42331" style="width: 377px; height: 3px; left: 151px; top: 3451px; position: absolute; background: #303843"></div>
-    <div data-layer="Rectangle 42332" class="Rectangle42332" style="width: 2040px; height: 219px; left: -36px; top: 3417px; position: absolute; background: #FB4601"></div>
-    <img data-layer="лого 1" class="1" style="width: 419px; height: 115px; left: 599px; top: 3469px; position: absolute" src="assets/лого.png" />
-    <div data-layer="#tact9_design" class="Tact9Design" style="width: 363px; height: 46px; left: 1027px; top: 3538px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 48px; font-family: Montserrat; font-weight: 700; line-height: 27px; word-wrap: break-word">#tact9_design </div>
-  </div>
-</div>
+<div class="album-page" id="app">
 
-<div class="mobile-version">
-  <div class="mobile-container" style="width: 402px; position: relative; background: #303843; overflow: hidden; min-height: 1674px;">
-    
-    <div data-layer="Rectangle 42327" class="Rectangle42327" style="width: 379px; height: 199px; left: 11px; top: 295px; position: absolute; background: #826DEE; border-radius: 20px"></div>
-    <img data-layer="лого 1" class="1" style="width: 112px; height: 31px; left: 31px; top: 312px; position: absolute" src="assets/лого.png" />
-    <div data-layer="Rectangle 42325" class="Rectangle42325" style="width: 70px; height: 25px; left: 301px; top: 315px; position: absolute; background: #FB4601; border-radius: 7px"></div>
-    <div data-svg-wrapper data-layer="Rectangle 42326" class="Rectangle42326" style="left: 270px; top: 315px; position: absolute"><svg width="24" height="25" viewBox="0 0 24 25" fill="none"><rect width="24" height="25" rx="7" fill="#FFDC16"/></svg></div>
-    <div data-layer="Блог" class="btn-blog-mobile" style="width: 60px; height: 14px; left: 306px; top: 320px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word; cursor: pointer;">Блог</div>
-    <div data-svg-wrapper data-layer="Vector" class="telegram-link-mobile" style="left: 272px; top: 320px; position: absolute; cursor: pointer;"><svg width="19" height="15" viewBox="0 0 19 15" fill="none"><path d="M17.7175 0.0986285L0.887183 6.20802C-0.26142 6.6423 -0.254775 7.24547 0.676448 7.51444L4.99747 8.78332L14.9951 2.84549C15.4678 2.57473 15.8997 2.72039 15.5447 3.01706L7.44466 9.8985H7.44276L7.44466 9.8994L7.14659 14.0921C7.58325 14.0921 7.77595 13.9035 8.02086 13.681L10.1197 11.7598L14.4853 14.7953C15.2903 15.2126 15.8684 14.9982 16.0687 14.0939L18.9345 1.38002C19.2278 0.272876 18.4855 -0.228421 17.7175 0.0986285Z" fill="#303843"/></svg></div>
-    <div data-layer="Новая дизайн студия, разрабатываем дизайн качественно, быстро и дешево." style="width: 170px; height: 128px; left: 31px; top: 346px; position: absolute; color: white; font-size: 11px; font-family: Montserrat; font-weight: 600; line-height: 12px; word-wrap: break-word">Новая дизайн студия, разрабатываем дизайн качественно, быстро и дешево. </div>
-    <div data-svg-wrapper data-layer="Vector 37" style="left: 31px; top: 401px; position: absolute"><svg width="119" height="10" viewBox="0 0 119 10" fill="none"><path d="M0.541016 1.39844L7.37539 4.03921C14.8323 6.92053 22.7576 8.39844 30.7518 8.39844H33.3637C38.1259 8.39844 42.861 7.68328 47.4108 6.27688L51.1199 5.13032C58.9393 2.71321 67.3453 3.00301 74.9797 5.95291C79.163 7.56933 83.6091 8.39844 88.0939 8.39844H91.0863C99.0565 8.39844 106.922 6.58143 114.084 3.08552L117.541 1.39844" stroke="#FF98DD" stroke-width="3"/></svg></div>
-    <div data-layer="tact9: Мы только начинаем, но уже чувствуем ритм." class="typewriter-text" style="width: 238px; height: 56px; left: 133px; top: 425px; position: absolute; text-align: right; color: white; font-size: 13px; font-family: Rubik Mono One; font-weight: 400; text-transform: uppercase; line-height: 15px; word-wrap: break-word;">tact9: Мы только начинаем, но уже чувствуем ритм.</div>
-    <div data-svg-wrapper data-layer="Vector 38" style="left: 301px; top: 401px; position: absolute"><svg width="72" height="12" viewBox="0 0 72 12" fill="none"><path d="M0.667969 1.34375L11.127 6.55459C19.7086 10.8301 29.7994 10.8301 38.381 6.55459C45.1159 3.19917 52.852 2.44654 60.1073 4.44087L70.668 7.34375" stroke="#FB4601" stroke-width="3"/></svg></div>
-    
-    <img data-layer="Group 1000009100 1" class="Group10000091001 float-elem float-elem-group" style="width: 228.80px; height: 228.80px; left: 15px; top: 18.77px; position: absolute; transform: rotate(-3deg); transform-origin: top left" src="assets/Group 1000009100.png" />
-    <img data-layer="котикспит" style="width: 231px; height: 154px; left: 112px; top: 127px; position: absolute" src="assets/котикспит.png" />
-    <div data-layer="В НАШЕМ БЛОГЕ ВЫ НАЙДЕТЕ ПОЛЕЗНЫЕ СТАТЬИ ДЛЯ ДИЗАЙНЕРОВ" style="width: 114px; height: 82px; left: 80px; top: 90px; position: absolute; color: #303843; font-size: 10px; font-family: Montserrat; font-weight: 800; line-height: 12px; word-wrap: break-word">В НАШЕМ БЛОГЕ ВЫ НАЙДЕТЕ ПОЛЕЗНЫЕ СТАТЬИ ДЛЯ ДИЗАЙНЕРОВ</div>
-    <img data-layer="звездочки" class="float-elem float-elem-star" style="width: 141.74px; height: 141.74px; left: 255px; top: 249.55px; position: absolute; transform: rotate(-56deg); transform-origin: top left" src="assets/звездочки.png" />
-    <img data-layer="элемент1" class="1 float-elem float-elem-1" style="width: 164.48px; height: 164.48px; left: 58.96px; top: 110px; position: absolute; transform: rotate(35deg); transform-origin: top left" src="assets/элемент1.png" />
-    <div data-layer="Rectangle 42328" class="Rectangle42328" style="width: 95px; height: 28px; left: 197px; top: 21px; position: absolute; background: #FB4601; border-radius: 20px"></div>
-    <div data-layer="Rectangle 42329" class="Rectangle42329" style="width: 172px; height: 28px; left: 11px; top: 21px; position: absolute; background: #826DEE; border-radius: 20px"></div>
-    <div data-layer="О НАС" class="btn-about-mobile" style="width: 73px; height: 20px; left: 208px; top: 25px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word; cursor: pointer;">О НАС</div>
-    <div data-layer="ПРАЙС-ЛИСТ" class="btn-price-scroll-mobile" style="width: 156px; height: 13px; left: 19px; top: 28px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 20px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word; cursor: pointer;">ПРАЙС-ЛИСТ</div>
-    
-    <img data-layer="бумагаоптимизация 1" style="width: 433px; height: 921px; left: -20px; top: 497px; position: absolute; pointer-events: none;" src="assets/бумагаоптимизация.png" />
-    <div data-layer="ДИЗАЙН" class="animate-text" style="width: 398px; height: 48px; left: 0px; top: 561px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #303843; font-size: 40px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">ДИЗАЙН</div>
-    <div data-layer="прайс-лист" style="width: 398px; height: 48px; left: 2px; top: 1041px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #303843; font-size: 40px; font-family: Montserrat; font-weight: 700; text-transform: uppercase; line-height: 40px; word-wrap: break-word">прайс-лист</div>
-    <img data-layer="элемент2" class="2 float-elem float-elem-2" style="width: 163.81px; height: 163.81px; left: 59.65px; top: 837px; position: absolute; transform: rotate(47deg); transform-origin: top left" src="assets/элемент2.png" />
-    
-    <div data-layer="Rectangle 42313" style="width: 2px; height: 102px; left: 69px; top: 626px; position: absolute; background: #303843"></div>
-    <div data-layer="Дизайн — это не просто то, как он выглядит и ощущается..." style="width: 243px; height: 46px; left: 82px; top: 627px; position: absolute; color: #303843; font-size: 11px; font-family: Montserrat; font-weight: 500; line-height: 15px; word-wrap: break-word">Дизайн — это не просто то, как он выглядит и ощущается. Дизайн — это то, как это работает.<br/>Сложно создавать изделия по интересам. Часто люди не знают, чего хотят, пока вы им это не покажете.</div>
-    <div data-layer="Стив Джобс." style="width: 243px; height: 46px; left: 82px; top: 703px; position: absolute; color: #303843; font-size: 11px; font-family: Montserrat; font-weight: 700; line-height: 40px; word-wrap: break-word">Стив Джобс.</div>
-    <div data-svg-wrapper data-layer="Rectangle 42312" style="left: 69px; top: 739px; position: absolute"><svg width="2" height="56"><rect width="2" height="56" fill="#303843"/></svg></div>
-    <div data-layer="Есть три ответа на результат дизайна – да, нет и «ничего себе»!" style="width: 243px; height: 45px; left: 82px; top: 738px; position: absolute; color: #303843; font-size: 11px; font-family: Montserrat; font-weight: 500; line-height: 15px; word-wrap: break-word">Есть три ответа на результат дизайна – да, нет и «ничего себе»! Ничего себе – это то, к чему надо стремиться.</div>
-    <div data-layer="Милтон Глэзер, графический дизайнер." style="width: 297px; height: 77px; left: 82px; top: 783px; position: absolute; color: #303843; font-size: 11px; font-family: Montserrat; font-weight: 700; word-wrap: break-word">Милтон Глэзер, графический дизайнер.</div>
-    <div data-layer="Rectangle 42314" style="width: 2px; height: 101px; left: 69px; top: 806px; position: absolute; background: #303843"></div>
-    <div data-layer="Дизайн — это визуальное мышление..." style="width: 236px; height: 46px; left: 78px; top: 806px; position: absolute; color: #303843; font-size: 11px; font-family: Montserrat; font-weight: 500; line-height: 15px; word-wrap: break-word">Дизайн — это визуальное мышление.<br/>Я хочу создавать красивые вещи, даже если это никому не нужно, в качестве противостояния некрасивым вещам. Это – мое намерение.</div>
-    <div data-layer="Сол Басс, американский графический дизайнер." style="width: 275px; height: 45px; left: 78px; top: 883px; position: absolute; color: #303843; font-size: 11px; font-family: Montserrat; font-weight: 700; line-height: 12px; word-wrap: break-word">Сол Басс, американский графический дизайнер.</div>
-    
-    <div style="position: relative;">
-      <img id="price-scroll-target-mobile" data-layer="Frame 155257679 1" class="Frame1552576791" style="width: 408px; height: 218px; left: -8px; top: 1072px; position: absolute" src="assets/Frame 155257679.png" />
+    <div class="dots" id="dotsContainer">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
     </div>
-    <img data-layer="звездочки" class="float-elem float-elem-star" style="width: 141.74px; height: 141.74px; left: 248px; top: 1352.55px; position: absolute; transform: rotate(-56deg); transform-origin: top left; pointer-events: none;" src="assets/звездочки.png" />
-    <img data-layer="блоглого 1" style="width: 285px; height: 75px; left: 62px; top: 1474px; position: absolute" src="assets/блоглого.png" />
-    <div data-layer="Rectangle 42332" style="width: 414px; height: 108px; left: -1px; top: 1566px; position: absolute; background: #FB4601"></div>
-    <img data-layer="лого 2" style="width: 220px; height: 60px; left: 16px; top: 1591px; position: absolute" src="assets/лого.png" />
-    <div data-layer="#tact9_design" style="width: 155px; height: 46px; left: 237px; top: 1614px; position: absolute; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 20px; font-weight: 700;">#tact9_design</div>
-    
-    <img data-layer="пятнаоптимизация 2" style="width: 402px; height: 1507px; left: 0px; top: 9px; position: absolute; pointer-events: none; z-index: 0;" src="assets/пятнаоптимизация.png" />
-    <img data-layer="БОЛЬШЕ РАБОТ В НАШЕМ PINTEREST 1" class="Pinterest1" style="width: 328px; height: 12px; left: 37px; top: 1435px; position: absolute" src="assets/БОЛЬШЕ РАБОТ В НАШЕМ PINTEREST.png" />
-  </div>
+
+    <div class="slides-container">
+
+        <div class="slide active" data-index="0">
+            <div class="page-label">◆ СЮРПРИЗ ◆</div>
+            <div class="page-title">ДЛЯ ТЕБЯ</div>
+            <div class="gift-scene">
+                <div class="gift-image-wrapper" id="giftWrapper">
+                    <img src="gift.png" alt="Подарок" />
+                    <div class="gift-glow" id="giftGlow"></div>
+                </div>
+                <div class="gift-hint" id="giftHint">[ НАЖМИ ]</div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="1">
+            <div class="page-label">◆ Я ОРУ 🐷 ◆</div>
+            <div class="page-title">СНИМКИ</div>
+            <div class="polaroid-grid">
+                <div class="polaroid"><img src="PHOTO1.jpg" alt="момент" /><div class="polaroid-caption">Ору</div></div>
+                <div class="polaroid"><img src="photo2.jpg" alt="момент" /><div class="polaroid-caption">Ты посмотри какая хамка</div></div>
+                <div class="polaroid">
+                    <div class="video-placeholder" id="customVideo">
+                        <video id="myVideo" playsinline preload="metadata">
+                            <source src="VIDEO.mp4" type="video/mp4">
+                            <source src="VIDEO.webm" type="video/webm">
+                            ОШИБКА
+                        </video>
+                        <div class="play-overlay" id="playOverlay"></div>
+                    </div>
+                    <div class="polaroid-caption">так...это мы пропустим</div>
+                </div>
+                <div class="polaroid"><img src="photo3.jpg" alt="момент" /><div class="polaroid-caption">инстасамец</div></div>
+                <div class="polaroid"><img src="photo4.jpg" alt="момент" /><div class="polaroid-caption">я вот чувствую 😳😳😳😳</div></div>
+                <div class="polaroid"><img src="photo5.jpg" alt="момент" /><div class="polaroid-caption">🐽🐽🐖🐖🐷🐷🐷</div></div>
+            </div>
+            <div style="margin-top:6px; font-size:7px; color:#4a2a4a; font-family:'Press Start 2P',monospace; letter-spacing:1px; opacity:0.5;">▸ КАЖДЫЙ КАДР — ЧАСТЬ НАС ◂</div>
+        </div>
+
+        <div class="slide" data-index="2">
+            <div class="page-label">◆ МУЗЫКА ◆</div>
+            <div class="page-title">ЭТА ПЕСНЯ</div>
+            <div class="video-frame">
+                <video controls style="width:100%; aspect-ratio:16/9; background:#0a000a; border:2px solid #2a1a2a; display:block;">
+                    <source src="ЗППП - CUPSIZE lyrics текст [get-save.com].mp4" type="video/mp4">
+                    <source src="ЗПП.webm" type="video/webm">
+                     НЕ УДАЛОСЬ ЗАГРУЗИТЬ ВИДЕО
+        </video>
+            </div>
+            <div class="quote-block">
+                <span>Я хочу заболеть тобой</span>, как дым сигарет, я проникну в твой рот<br>
+                Попаду в твой желудок и буду сидеть там <span>, буду сидеть там</span>
+            </div>
+        </div>
+
+        <div class="slide" data-index="3">
+            <div class="page-label">◆ ДЛЯ ТЕБЯ ◆</div>
+            <div class="page-title">ПИСЬМО</div>
+            <div class="letter-scene">
+                <div class="envelope-photo" id="envelopeTrigger">
+                    <img src="letter.png" alt="Конверт" />
+                </div>
+                <div class="envelope-hint">[ НАЖМИ ]</div>
+                <div class="letter-text-box" id="letterBox">
+                    <h4>СПЕЦИАЛЬНО ДЛЯ АРИШИ</h4>
+                    <p>
+                        СЛИШКОМ МНОГО НА СЕБЯ БЕРЕШЬ!!!!!!.
+                    </p>
+                    <p>
+                        ТЫ ПОСМОТРИ КАКАЯ ХАМКА🐷🐷🐷🐷🐷🤓🤓🤓.
+                    </p>
+                    <p>
+                        ОРУ ОРУ ОРУ ОРУ ОРУ. НЕТ Я НЕ ОРУ, КОРОЧЕ Я ТЯ ЛЮБЛЮ ТИПО, МНЕ КРИНЖОВО ТУТ ПИСАТЬ ЧЕТО НОРМАЛЬНОЕ.
+                    </p>
+                    <div class="sig">ТВОЙ ЭЛЕКТРОЩИТОК,<br> ЛИЧИНУС2.0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-index="4">
+            <div class="page-label">◆ ❤️ ◆</div>
+            <div class="page-title">СПАСИБО</div>
+            <div class="final-heart">
+                <div class="sticker-container">
+                    <div class="sticker sticker-left">
+                        <img src="ору.gif" alt="стикер" />
+                    </div>
+                    <div class="sticker sticker-right">
+                            <img src="tysm.gif" alt="" />
+                        </video>
+                    </div>
+                </div>
+                ЭТА ОТКРЫТКА — МАЛЕНЬКАЯ ЧАСТИЧКА МОЕЙ БЛАГОДАРНОСТИ (ЭТО ТИПО ПОДАРОК, КОТОРОЙ Я НЕ ПОДАРИЛ НА ТВОЕ ДЕНЬ РОЖДЕНИЯ, ПОТОМУ ЧТО МЫ БЫЛИ В ССОРЕ).
+                <span>ТЫ — ЛИЧИНУС</span>
+            </div>
+            <div class="final-decor">◆ ◇ ◆ ◇ ◆</div>
+        </div>
+
+    </div>
+
+    <div class="nav-area">
+        <span class="page-counter" id="pageCounter">1 / 5</span>
+        <button class="btn-next" id="nextBtn">ОСЕМЕНИТЬ❤️ ПИНЬ ПУНЬ</button>
+    </div>
+
 </div>
 
 <script>
-  (function() {
-    const desktopContainer = document.querySelector('.desktop-version .desktop-container');
-    const desktopWrapper = document.querySelector('.desktop-version');
-    const DESKTOP_BASE_HEIGHT = 3636;
-    
-    function updateDesktopScaleAndHeight() {
-      if (!desktopContainer || !desktopWrapper) return;
-      const windowWidth = window.innerWidth;
-      let scale = 1;
-      if (windowWidth < 1920 && windowWidth >= 601) {
-        scale = windowWidth / 1920;
-      } else if (windowWidth < 601) {
-        scale = 1;
-      }
-      desktopContainer.style.transform = `scale(${scale})`;
-      
-      const scaledHeight = DESKTOP_BASE_HEIGHT * scale;
-      desktopWrapper.style.height = scaledHeight + 'px';
-      desktopWrapper.style.minHeight = 'unset';
-      desktopWrapper.style.overflow = 'hidden';
-      document.body.style.margin = '0';
-      document.body.style.padding = '0';
-      document.documentElement.style.margin = '0';
-      document.documentElement.style.padding = '0';
-    }
-    
-    if (desktopContainer) {
-      updateDesktopScaleAndHeight();
-      window.addEventListener('resize', () => {
-        updateDesktopScaleAndHeight();
-      });
-      window.addEventListener('load', () => {
-        updateDesktopScaleAndHeight();
-      });
-    }
+    (function() {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const nextBtn = document.getElementById('nextBtn');
+        const counter = document.getElementById('pageCounter');
+        const giftWrapper = document.getElementById('giftWrapper');
+        const giftGlow = document.getElementById('giftGlow');
+        const giftHint = document.getElementById('giftHint');
+        const envelopeTrigger = document.getElementById('envelopeTrigger');
+        const letterBox = document.getElementById('letterBox');
+        const video = document.getElementById('myVideo');
+        const playOverlay = document.getElementById('playOverlay');
 
-    function scrollToExamples() {
-      const targetDesktop = document.getElementById('price-scroll-target-desktop') || document.querySelector('img[data-layer="примерыработ 1"]');
-      const targetMobile = document.getElementById('price-scroll-target-mobile') || document.querySelector('.Frame1552576791');
-      
-      if (targetDesktop && window.innerWidth > 600) {
-        targetDesktop.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (targetMobile && window.innerWidth <= 600) {
-        targetMobile.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
+        let current = 0;
+        const total = slides.length;
+        let isGiftOpened = false;
+        let isVideoPlaying = false;
 
-    const priceBtnsDesktop = document.querySelectorAll('.btn-price-scroll');
-    const priceBtnsMobile = document.querySelectorAll('.btn-price-scroll-mobile');
-    
-    const attachPriceListeners = (buttons) => {
-      buttons.forEach(btn => {
-        btn.removeEventListener('click', scrollToExamples);
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          scrollToExamples();
-        });
-      });
-    };
-    
-    attachPriceListeners(priceBtnsDesktop);
-    attachPriceListeners(priceBtnsMobile);
+        function goTo(index) {
+            if (index < 0 || index >= total) return;
+            slides.forEach((s, i) => {
+                s.classList.toggle('active', i === index);
+            });
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+            counter.textContent = (index + 1) + ' / ' + total;
+            current = index;
 
-    const aboutBtnsDesktop = document.querySelectorAll('.btn-about');
-    const aboutBtnsMobile = document.querySelectorAll('.btn-about-mobile');
-    
-    const attachAboutListeners = (buttons) => {
-      buttons.forEach(btn => {
-        btn.removeEventListener('click', () => {});
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = 'postscode/post2.html';
-        });
-      });
-    };
-    
-    attachAboutListeners(aboutBtnsDesktop);
-    attachAboutListeners(aboutBtnsMobile);
-
-    const blogBtnsDesktop = document.querySelectorAll('.btn-blog');
-    const blogBtnsMobile = document.querySelectorAll('.btn-blog-mobile');
-    
-    const attachBlogListeners = (buttons) => {
-      buttons.forEach(btn => {
-        btn.removeEventListener('click', () => {});
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          window.location.href = 'blog.html';
-        });
-      });
-    };
-    
-    attachBlogListeners(blogBtnsDesktop);
-    attachBlogListeners(blogBtnsMobile);
-
-    const tgLink = 'https://t.me/tact9design';
-    const tgDesktop = document.querySelectorAll('.telegram-link');
-    const tgMobile = document.querySelectorAll('.telegram-link-mobile');
-    
-    const attachTelegramListeners = (elements) => {
-      elements.forEach(el => {
-        el.removeEventListener('click', () => {});
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          window.open(tgLink, '_blank');
-        });
-      });
-    };
-    
-    attachTelegramListeners(tgDesktop);
-    attachTelegramListeners(tgMobile);
-
-    function setupTypewriter() {
-      const elements = document.querySelectorAll('.typewriter-text');
-      if (elements.length === 0) return;
-      const fullText = "tact9: Мы только начинаем, но уже чувствуем ритм.";
-      elements.forEach(el => {
-        el.innerText = '';
-        let isDeleting = false;
-        let currentIndex = 0;
-        let timer;
-        el.classList.add('typewriter-cursor');
-        
-        function typeEffect() {
-          if (!isDeleting && currentIndex <= fullText.length) {
-            el.innerText = fullText.substring(0, currentIndex);
-            currentIndex++;
-            timer = setTimeout(typeEffect, 100);
-            if (currentIndex === fullText.length + 1) {
-              setTimeout(() => { isDeleting = true; }, 2000);
+            if (current === total - 1) {
+                nextBtn.textContent = 'Я СЛЫШУ СТОКА 🫴 А ХОЧУ СЛВШАТЬ СТОКА 🤌';
+                nextBtn.disabled = true;
+            } else {
+                nextBtn.textContent = 'ОСЕМЕНИТЬ❤️ ПИНЬ ПУНЬ';
+                nextBtn.disabled = false;
             }
-          } 
-          else if (isDeleting && currentIndex >= 0) {
-            el.innerText = fullText.substring(0, currentIndex);
-            currentIndex--;
-            timer = setTimeout(typeEffect, 50);
-            if (currentIndex === 0) {
-              isDeleting = false;
-              setTimeout(() => { typeEffect(); }, 500);
-              return;
+
+            if (letterBox.classList.contains('open')) {
+                letterBox.classList.remove('open');
             }
-          } else {
-            timer = setTimeout(typeEffect, 100);
-          }
+
+            if (video && !video.paused) {
+                video.pause();
+                isVideoPlaying = false;
+                if (playOverlay) {
+                    playOverlay.classList.remove('hidden');
+                }
+            }
         }
-        typeEffect();
-      });
-    }
-    setupTypewriter();
 
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.animate-text').forEach((el, idx) => {
-        el.style.animationDelay = `${idx * 0.1}s`;
-      });
-    });
-  })();
+        function createExplosion() {
+            const colors = ['#ff6b8a', '#ffd860', '#6a89cc', '#f8a5c2', '#78e08f', '#f19066', '#a29bfe', '#fd79a8', '#ff9ff3', '#ff6348'];
+            const container = document.createElement('div');
+            container.className = 'confetti-container';
+            document.body.appendChild(container);
+
+            for (let i = 0; i < 70; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                const size = 6 + Math.random() * 14;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = 10 + Math.random() * 80;
+                const delay = Math.random() * 0.6;
+                const duration = 1 + Math.random() * 1.6;
+                const shapes = ['0px', '2px', '50%'];
+                const shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+                piece.style.cssText = `
+                    left: ${left}%;
+                    top: -20px;
+                    width: ${size}px;
+                    height: ${size * (0.4 + Math.random() * 1.2)}px;
+                    background: ${color};
+                    border-radius: ${shape};
+                    border: ${Math.random() > 0.5 ? '1px solid rgba(255,255,255,0.1)' : 'none'};
+                    animation-duration: ${duration}s;
+                    animation-delay: ${delay}s;
+                    transform: rotate(${Math.floor(Math.random() * 4) * 90}deg);
+                `;
+                container.appendChild(piece);
+            }
+
+            const starChars = ['◆', '◇', '●', '■', '▲', '▼', '★', '☆'];
+            for (let i = 0; i < 16; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                const char = starChars[Math.floor(Math.random() * starChars.length)];
+                const tx = (Math.random() - 0.5) * 700;
+                const ty = -250 - Math.random() * 500;
+                const left = 10 + Math.random() * 80;
+                const delay = Math.random() * 0.4;
+
+                sparkle.style.cssText = `
+                    left: ${left}%;
+                    top: 50%;
+                    font-size: ${18 + Math.random() * 28}px;
+                    --tx: ${tx}px;
+                    --ty: ${ty}px;
+                    animation-delay: ${delay}s;
+                    animation-duration: ${0.8 + Math.random() * 0.8}s;
+                    color: ${colors[Math.floor(Math.random() * colors.length)]};
+                `;
+                sparkle.textContent = char;
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 2200 + delay * 1000);
+            }
+
+            setTimeout(() => {
+                container.remove();
+            }, 4000);
+        }
+
+        function openGift() {
+            if (isGiftOpened) return;
+            isGiftOpened = true;
+
+            giftGlow.classList.add('active');
+
+            createExplosion();
+
+            giftHint.textContent = '★ ОТКРЫТО! ★';
+            giftHint.style.color = '#ff9ab0';
+            giftHint.style.borderBottomColor = '#ff9ab0';
+
+            setTimeout(() => {
+                if (current === 0) {
+                    goTo(1);
+                }
+            }, 1500);
+        }
+
+        giftWrapper.addEventListener('click', function(e) {
+            e.stopPropagation();
+            openGift();
+        });
+
+        giftHint.addEventListener('click', function(e) {
+            e.stopPropagation();
+            openGift();
+        });
+
+        envelopeTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            letterBox.classList.toggle('open');
+            this.style.transform = 'scale(0.94)';
+            setTimeout(() => { this.style.transform = ''; }, 150);
+        });
+
+        nextBtn.addEventListener('click', function() {
+            if (current < total - 1) {
+                goTo(current + 1);
+            }
+        });
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', function() {
+                goTo(idx);
+            });
+        });
+
+        if (video && playOverlay) {
+            playOverlay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (video.paused) {
+                    video.play();
+                    isVideoPlaying = true;
+                    playOverlay.classList.add('hidden');
+                } else {
+                    video.pause();
+                    isVideoPlaying = false;
+                    playOverlay.classList.remove('hidden');
+                }
+            });
+
+            video.addEventListener('ended', function() {
+                isVideoPlaying = false;
+                playOverlay.classList.remove('hidden');
+            });
+
+            video.addEventListener('pause', function() {
+                if (!video.ended) {
+                    isVideoPlaying = false;
+                    playOverlay.classList.remove('hidden');
+                }
+            });
+        }
+
+        goTo(0);
+    })();
 </script>
+
 </body>
 </html>
